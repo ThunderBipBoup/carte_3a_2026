@@ -1,7 +1,9 @@
+DATA_FILENAME = 'data_carte_3A_2026.csv'
+
 // Fonction pour charger et parser le fichier CSV
 async function loadCSV() {
     try {
-        const response = await fetch('vraidata.csv');
+        const response = await fetch(DATA_FILENAME);
         if (!response.ok) {
             throw new Error('Erreur lors du chargement du fichier CSV');
         }
