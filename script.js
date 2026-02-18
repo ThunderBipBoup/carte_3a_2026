@@ -51,7 +51,13 @@ async function loadCities() {
                 residents: []
             };
         }
-        cities[cityName].residents.push(`${row.Prenom} ${row.Nom} (${row.Entreprise})`);
+        if (row.Date_Fin){
+            cities[cityName].residents.push(`${row.Prenom} ${row.Nom} (${row.Entreprise} jusqu'au ${row.Date_Fin})`);
+        }
+        else 
+        {
+            cities[cityName].residents.push(`${row.Prenom} ${row.Nom} (${row.Entreprise})`);
+        }
     }
 
     console.log('Données des villes chargées avec succès');
@@ -73,7 +79,7 @@ loadCities().then(cities => {
     cities.forEach(city => {
         const marker = L.marker([city.lat, city.lng])
             .addTo(map)
-            .bindPopup(`<b>${city.name.charAt(0).toUpperCase() + city.name.slice(1)}</b><br>En stage: ${city.residents ? city.residents.join(', ') : 'Aucun résident listé'}`);
+            .bindPopup(`<b>${city.name.charAt(0).toUpperCase() + city.name.slice(1)}</b><br>En stage ici : ${city.residents ? city.residents.join(', ') : 'Aucun résident listé'}`);
 
         // Ouvrir la popup au clic
         marker.on('click', function() {
