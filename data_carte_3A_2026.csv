@@ -1,5 +1,22 @@
-Prenom,Nom,Ville_Nettoyee,Entreprise,Date_fin,Longitude,Latitude
+Prenom,Nom,Ville_Nettoyee,Entreprise,Date_Fin,Longitude,Latitude
 Emma,Delahaie,Colombes,Ministère transition écologique,30/06/2026,2.247799,48.922535
 Gabin,Dubois,Rennes,Spikeelabs,22/08/2026,-1.68365,48.110899
 Guillaume,Nisslé,Lyon,Edvance,28/08/2026,4.835,45.758
-Mina,AL QASRANI,Grenoble,Schneider Electric,31/08/2026,5.724369,45.182828
+Mina,AL QASRANI,Grenoble,Schneider Electric ,31/08/2026,5.724369,45.182828
+Jérémy,Marguin ,Strasbourg,CNRS IPHC,31/08/2026,7.761454,48.579831
+Imane,BERRY,Paris,Laboratoire Chimie ParisTech ,,2.347,48.859
+Elisa,Levain,Marseille,Laboratoire M2P2,31/07/2026,5.405,43.282
+Noémie,Cichowski,Grenoble,CEA,23/08/2026,5.724369,45.182828
+Antonin,Pivard,Ettenheim ,Monolithic Power Systems ,,7.598659,48.41046
+Lucie,Basuyau,Paris,IBHGC,18/07/2026,2.347,48.859
+Enzo,Bocquel,Strasbourg,CNRS-CESQ,24/07/2026,7.761454,48.579831
+Léo,Quesnot,Obernai,Hager,21/08/2026,7.470625,48.462885
+Inès ,Boudjemiloooo ,Bures-sur-Yvette,Institut d'astrophysique spatiale ,31/07/2026,2.158042,48.690963
+Pierrick,Bouilloux,Bordeaux,Cnrs/Crmsb,31/08/2026,-0.587877,44.851897
+Julien,Sauer,Paris,CEA,01/09/2026,2.347,48.859
+Etienne ,de Poix,Toulouse ,Airbus Défense and Space,14/08/2026,1.433805,43.604082
+Yseult,Fontaine,Paris,Institut pasteur,01/10/2029,2.347,48.859
+Régina,SECA,Bruxelles,Cochlear,18/02/2026,2.881945,47.773607
+Charlotte,Demeret,Bordeaux,IHU Liryc,21/08/2026,-0.587877,44.851897
+Pauline,Berruet,Paris ,CERAH Invalides ,31/07/2026,2.347,48.859
+Flavie ,Lemiere ,Offenbourg ,IBMS,14/08/2026,5.570297,46.677678
