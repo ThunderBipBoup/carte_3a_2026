@@ -2,21 +2,48 @@ Prenom,Nom,Ville_Nettoyee,Entreprise,Date_Fin,Longitude,Latitude
 Emma,Delahaie,Colombes,Ministère transition écologique,30/06/2026,2.247799,48.922535
 Gabin,Dubois,Rennes,Spikeelabs,22/08/2026,-1.68365,48.110899
 Guillaume,Nisslé,Lyon,Edvance,28/08/2026,4.835,45.758
-Mina,AL QASRANI,Grenoble,Schneider Electric ,31/08/2026,5.724369,45.182828
+Mina,Al Qasrani,Grenoble,Schneider Electric ,31/08/2026,5.724369,45.182828
 Jérémy,Marguin ,Strasbourg,CNRS IPHC,31/08/2026,7.761454,48.579831
-Imane,BERRY,Paris,Laboratoire Chimie ParisTech ,,2.347,48.859
+Imane,Berry,Paris,Laboratoire Chimie ParisTech ,,2.347,48.859
 Elisa,Levain,Marseille,Laboratoire M2P2,31/07/2026,5.405,43.282
 Noémie,Cichowski,Grenoble,CEA,23/08/2026,5.724369,45.182828
-Antonin,Pivard,Ettenheim ,Monolithic Power Systems ,,7.598659,48.41046
+Antonin,Pivard,Ettenheim (Allemagne),Monolithic Power Systems,,7.81349,48.2552348
 Lucie,Basuyau,Paris,IBHGC,18/07/2026,2.347,48.859
 Enzo,Bocquel,Strasbourg,CNRS-CESQ,24/07/2026,7.761454,48.579831
 Léo,Quesnot,Obernai,Hager,21/08/2026,7.470625,48.462885
-Inès ,Boudjemiloooo ,Bures-sur-Yvette,Institut d'astrophysique spatiale ,31/07/2026,2.158042,48.690963
+Inès ,Boudjemilo,Bures-sur-Yvette,Institut d'astrophysique spatiale ,31/07/2026,2.158042,48.690963
 Pierrick,Bouilloux,Bordeaux,Cnrs/Crmsb,31/08/2026,-0.587877,44.851897
 Julien,Sauer,Paris,CEA,01/09/2026,2.347,48.859
-Etienne ,de Poix,Toulouse ,Airbus Défense and Space,14/08/2026,1.433805,43.604082
+Etienne,De Poix,Toulouse ,Airbus Défense and Space,14/08/2026,1.433805,43.604082
 Yseult,Fontaine,Paris,Institut pasteur,01/10/2029,2.347,48.859
-Régina,SECA,Bruxelles,Cochlear,18/02/2026,2.881945,47.773607
+Régina,Seca,Bruxelles,Cochlear,18/02/2026,4.352493,50.8467372
 Charlotte,Demeret,Bordeaux,IHU Liryc,21/08/2026,-0.587877,44.851897
 Pauline,Berruet,Paris ,CERAH Invalides ,31/07/2026,2.347,48.859
-Flavie ,Lemiere ,Offenbourg ,IBMS,14/08/2026,5.570297,46.677678
+Flavie,Lemiere,Offenbourg,IBMS,14/08/2026,7.9429235,48.4695984
+Bradley ,Spitz,Tahiti ,Institut du cancer de Polynésie Française ,,-149.4451681,-17.6873439
+Claire,Magné,Palaiseau,Simvia,04/09/2026,2.232499,48.716454
+Juliette,Landi,Amsterdam,Fluidlab - université d’Amsterdam ,31/07/2026,4.8924534,52.3730796
+Maxime,Brillant,Clermont Ferrand,Institut Pascal EnCoV,21/08/2026,3.107055,45.786671
+Leïlou,Bonnard,Strasbourg,CNRS - ICS,24/07/2026,7.761454,48.579831
+Sanaé,G-H,Alicante,Universidad de Alicante,27/07/2026,-0.4881708,38.3436365
+Naïs,Valette,Lyon,OneOrtho,,4.835,45.758
+Raphaël,Brunet,Vienne,Department of Astrophysics - Wien Universität ,20/08/2026,16.3725042,48.2083537
+Félix ,Anger,Grenoble,IPAG,31/07/2026,5.724369,45.182828
+Luc,PACHOT,Bâle,NCCR SPIN - Université de Bâle - Quantum Basel,31/08/2026,7.5878261,47.5581077
+Roman,Bonnet,Strasbourg,CESQ,25/12/2063,7.761454,48.579831
+Julien,Rimbot,Paris,LIB,31/07/2026,2.347,48.859
+Guillaume,Pourchelle,Lyon,LBMC,21/08/2026,4.835,45.758
+Alberrique,Tonye,Paris,Parrot Drones ,29/08/2026,2.347,48.859
+Cyprien,Charlot,Troyes, Université de Technologie de Troyes,31/07/2026,4.075149,48.292817
+Nathan,Cerisara,Bruxelles,Laboratoire de recherche IRIDIA,21/08/2026,4.352493,50.8467372
+Mohamed Hedi,Dridi,Paris,Alice & Bob,31/08/2026,2.347,48.859
+Lucas,Vayssiere,Palaiseau,Thalès Lynred,28/08/2026,2.232499,48.716454
+Adem,Lachiheb,Châtillon,Orange,10/07/2026,2.2897124,48.7997756
+Eulalie,Bouché,Strasbourg ,Icube - IHU,31/07/2026,7.761454,48.579831
+Rayna,Benghali,Montréal,CHUM ,16/08/2026,-73.5698065,45.5031824
+Camille,Richard,Illkirch ,Optiive,15/08/2026,7.713225,48.541192
+Alice,Laurent,Rennes,Equipe genscale - INRIA,31/07/2026,-1.68365,48.110899
+Idalie,Gil,Paris,Syntopia,30/08/2026,2.347,48.859
+Kimvy,Hagen,Trappes,LNE,31/08/2026,1.993009,48.778249
+Ines,Hedfi,Orsay,BIOMAPS-CEA,30/08/2026,2.190707,48.696558
+Felix,Lardat,Munich,Dlr,31/08/2026,11.5753822,48.1371079

@@ -79,7 +79,7 @@ loadCities().then(cities => {
     cities.forEach(city => {
         const marker = L.marker([city.lat, city.lng])
             .addTo(map)
-            .bindPopup(`<b>${city.name.charAt(0).toUpperCase() + city.name.slice(1)}</b><br>En stage ici : ${city.residents ? city.residents.join(', ') : 'Aucun résident listé'}`);
+            .bindPopup(`<b>${city.name.charAt(0).toUpperCase() + city.name.slice(1)}</b><br>En stage ici : <br> ${city.residents ? city.residents.join(',<br>') : 'Aucun résident listé'}`);
 
         // Ouvrir la popup au clic
         marker.on('click', function() {
