@@ -1,152 +1,137 @@
-DATA_FILENAME = 'data_carte_3A_2026.csv'
+const DATA_FILENAME = "data_carte_3A_2026.csv";
 
-// Fonction pour charger et parser le fichier CSV
-async function loadCSV() {
-    try {
-        const response = await fetch(DATA_FILENAME);
-        if (!response.ok) {
-            throw new Error('Erreur lors du chargement du fichier CSV');
-        }
-        const csvText = await response.text();
-        console.log('CSV chargé avec succès');
-        return parseCSV(csvText);
-    } catch (error) {
-        console.error('Erreur:', error);
-        alert('Impossible de charger le fichier CSV.');
-        return [];
-    }
-}
+const map = L.map("map").setView([46.603354, 1.888334], 6);
 
-// Fonction pour parser le texte CSV
-function parseCSV(csvText) {
-    const lines = csvText.split('\n');
-    const headers = lines[0].split(',');
-    const data = lines.slice(1).map(line => {
-        const values = line.split(',');
-        if (values.length !== headers.length) {
-            console.warn('Ligne ignorée en raison d\'un nombre incorrect de valeurs:', line);
-            return null;
-        }
-        return headers.reduce((obj, header, index) => {
-            obj[header.trim()] = values[index].trim();
-            return obj;
-        }, {});
-    }).filter(row => row !== null); // Filtrer les lignes nulles
-    console.log('CSV parsé avec succès');
-    return data;
-}
-
-// Fonction pour charger les données des villes à partir du CSV
-async function loadCities() {
-    const data = await loadCSV();
-    const cities = {};
-
-    for (const row of data) {
-        const cityName = row.Ville_Nettoyee.toLowerCase();
-        if (!cities[cityName]) {
-            cities[cityName] = {
-                name: cityName,
-                lat: parseFloat(row.Latitude),
-                lng: parseFloat(row.Longitude),
-                residents: []
-            };
-        }
-        if (row.Date_Fin){
-            cities[cityName].residents.push(`${row.Prenom} ${row.Nom} (${row.Entreprise} jusqu'au ${row.Date_Fin})`);
-        }
-        else 
-        {
-            cities[cityName].residents.push(`${row.Prenom} ${row.Nom} (${row.Entreprise})`);
-        }
-    }
-
-    console.log('Données des villes chargées avec succès');
-    return Object.values(cities);
-}
-
-// Initialiser la carte centrée sur la France
-const map = L.map('map').setView([46.603354, 1.888334], 6);
-
-// Ajouter une couche de tuiles OpenStreetMap
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  attribution:
+    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 }).addTo(map);
 
-// Charger les villes et ajouter des marqueurs
-let cityMarkers = [];
-
-loadCities().then(cities => {
-    cities.forEach(city => {
-        const marker = L.marker([city.lat, city.lng])
-            .addTo(map)
-            .bindPopup(`<b>${city.name.charAt(0).toUpperCase() + city.name.slice(1)}</b><br>En stage ici : <br> ${city.residents ? city.residents.join(',<br>') : 'Aucun résident listé'}`);
-
-        // Ouvrir la popup au clic
-        marker.on('click', function() {
-            marker.openPopup();
-        });
-
-        cityMarkers.push({
-            name: city.name.toLowerCase(),
-            residents: city.residents ? city.residents.map(resident => resident.toLowerCase()) : [],
-            marker
-        });
-    });
-
-    console.log('Marqueurs de villes ajoutés avec succès');
+// --- CONFIGURATION D'UNE ICÔNE PERSONNALISÉE ---
+const customIcon = L.icon({
+  iconUrl:
+    "https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png", // Vous pouvez mettre votre propre URL d'image
+  iconSize: [40, 40],
+  iconAnchor: [20, 40],
+  popupAnchor: [0, -35],
 });
 
-// Fonction pour afficher/masquer le menu
-function toggleMenu() {
-    const menu = document.getElementById("menu");
-    menu.classList.toggle("open");
+async function loadCSV() {
+  try {
+    const response = await fetch(DATA_FILENAME);
+    if (!response.ok) throw new Error("Erreur de chargement");
+    const csvText = await response.text();
+    return parseCSV(csvText);
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
 }
 
-// Gestion de la recherche et centrage sur la ville trouvée
-document.getElementById('search').addEventListener('input', function() {
-    const query = this.value.toLowerCase();
-    const suggestions = document.getElementById('suggestions');
-    suggestions.innerHTML = ''; // Vider les suggestions
+function parseCSV(csvText) {
+  const lines = csvText.split("\n");
+  const headers = lines[0].split(",");
+  return lines
+    .slice(1)
+    .map((line) => {
+      const values = line.split(",");
+      if (values.length < headers.length) return null;
+      return headers.reduce((obj, header, index) => {
+        obj[header.trim()] = values[index] ? values[index].trim() : "";
+        return obj;
+      }, {});
+    })
+    .filter((row) => row !== null);
+}
 
-    if (query.length > 2) {
-        const filteredCities = cityMarkers.filter(city => 
-            city.name.includes(query) || 
-            city.residents.some(resident => resident.includes(query))
-        );
+async function loadCities() {
+  const data = await loadCSV();
+  const cities = {};
 
-        // Vérifier si la recherche correspond à un résident
-        const isResidentSearch = filteredCities.some(city => 
-            city.residents.some(resident => resident.includes(query))
-        );
-
-        filteredCities.forEach(city => {
-            // Afficher la ville uniquement si la recherche correspond au nom de la ville
-            if (!isResidentSearch && city.name.includes(query)) {
-                const cityLi = document.createElement('li');
-                cityLi.textContent = city.name.charAt(0).toUpperCase() + city.name.slice(1);
-                cityLi.onclick = () => {
-                    city.marker.openPopup();
-                    map.setView(city.marker.getLatLng(), 10);
-                    document.getElementById('search').value = city.name;
-                    suggestions.innerHTML = ''; // Cacher les suggestions
-                };
-                suggestions.appendChild(cityLi);
-            }
-
-            // Afficher les résidents correspondants
-            city.residents.forEach(resident => {
-                if (resident.includes(query)) {
-                    const residentLi = document.createElement('li');
-                    residentLi.textContent = `${resident} (${city.name.charAt(0).toUpperCase() + city.name.slice(1)})`;
-                    residentLi.onclick = () => {
-                        city.marker.openPopup();
-                        map.setView(city.marker.getLatLng(), 10);
-                        document.getElementById('search').value = city.name;
-                        suggestions.innerHTML = ''; // Cacher les suggestions
-                    };
-                    suggestions.appendChild(residentLi);
-                }
-            });
-        });
+  data.forEach((row) => {
+    const cityName = row.Ville_Nettoyee;
+    const key = cityName.toLowerCase();
+    if (!cities[key]) {
+      cities[key] = {
+        name: cityName,
+        lat: parseFloat(row.Latitude),
+        lng: parseFloat(row.Longitude),
+        residents: [],
+      };
     }
+    // Stockage des infos détaillées pour la recherche
+    cities[key].residents.push({
+      fullname: `${row.Prenom} ${row.Nom}`,
+      company: row.Entreprise,
+      endDate: row.Date_Fin,
+      display: `• ${row.Prenom} ${row.Nom} (<b>${row.Entreprise}</b> ${row.Date_Fin ? "- jusqu'au " + row.Date_Fin : ""})`,
+    });
+  });
+  return Object.values(cities);
+}
+
+let cityMarkers = [];
+
+loadCities().then((cities) => {
+  cities.forEach((city) => {
+    const popupContent = `
+            <div style="font-family: 'Inter', sans-serif;">
+                <b style="color: #2563eb; font-size: 15px;">${city.name}</b><hr>
+                <div style="margin-top:8px; font-size:13px; line-height:1.4; color: #334155;">
+                    ${city.residents.map((r) => r.display).join("<br>")}
+                </div>
+            </div>`;
+
+    // Utilisation de l'icône personnalisée ici
+    const marker = L.marker([city.lat, city.lng], { icon: customIcon })
+      .addTo(map)
+      .bindPopup(popupContent);
+
+    cityMarkers.push({
+      name: city.name.toLowerCase(),
+      residents: city.residents,
+      marker,
+    });
+  });
 });
+
+function toggleMenu() {
+  document.getElementById("menu").classList.toggle("open");
+}
+
+document.getElementById("search").addEventListener("input", function () {
+  const query = this.value.toLowerCase();
+  const suggestions = document.getElementById("suggestions");
+  suggestions.innerHTML = "";
+
+  if (query.length > 1) {
+    cityMarkers.forEach((city) => {
+      // Chercher si le nom de la ville correspond
+      if (city.name.includes(query)) {
+        const li = document.createElement("li");
+        li.innerHTML = `📍 <b>VILLE : ${city.name.toUpperCase()}</b>`;
+        li.onclick = () => selectLocation(city);
+        suggestions.appendChild(li);
+      }
+
+      // Chercher dans les résidents (Nom ou Entreprise)
+      city.residents.forEach((res) => {
+        if (
+          res.fullname.toLowerCase().includes(query) ||
+          res.company.toLowerCase().includes(query)
+        ) {
+          const li = document.createElement("li");
+          li.innerHTML = `👤 ${res.fullname} <br><small>🏢 ${res.company} (${city.name})</small>`;
+          li.onclick = () => selectLocation(city);
+          suggestions.appendChild(li);
+        }
+      });
+    });
+  }
+});
+
+function selectLocation(city) {
+  map.setView(city.marker.getLatLng(), 11);
+  city.marker.openPopup();
+  if (window.innerWidth < 768) toggleMenu();
+}
